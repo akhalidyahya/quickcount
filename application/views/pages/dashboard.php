@@ -77,7 +77,7 @@
       <div class="row">
         <div class="col-md-6">
           <!-- DONUT CHART -->
-          <div class="box box-warning">
+          <div class="box box">
             <div class="box-header with-border">
               <h3 class="box-title">Diagram donat</h3>
 
@@ -95,7 +95,7 @@
         </div>
         <div class="col-md-6">
           <!-- BAR CHART -->
-          <div class="box box-warning">
+          <div class="box">
             <div class="box-header with-border">
               <h3 class="box-title">Diagram Batang</h3>
 
