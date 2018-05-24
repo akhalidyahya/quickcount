@@ -34,5 +34,12 @@ class mod_user extends CI_Model
     	$this->db->where('id',$id);
     	return $this->db->get('users');
   	}
+
+  	function getRelawan(){
+		$this->db->select('*');
+		$this->db->from('users');
+		$this->db->where('role','Relawan');
+    	return $this->db->get();
+	}
 }
  ?>

@@ -18,7 +18,7 @@
       <div class="row">
         <div class="col-sm-12">
           <!-- Default box -->
-          <div class="box box-primary">
+          <div class="box">
             <div class="box-header with-border">
               <h3 class="box-title">Tabel Data TPS</h3>
               <div class="box-tools pull-right">
@@ -36,6 +36,7 @@
                     <th>No</th>
                     <th>Nama TPS</th>
                     <th>Tempat TPS</th>
+                    <th>Aksi</th>
                   </tr>
                 </thead>
                 <tbody>

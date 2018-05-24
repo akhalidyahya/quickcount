@@ -23,7 +23,7 @@
 
             <div class="info-box-content">
               <span class="info-box-text">Jumlah TPS</span>
-              <span class="info-box-number">29</span>
+              <span class="info-box-number"><?php echo $jumlah_tps ?></span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -36,7 +36,7 @@
 
             <div class="info-box-content">
               <span class="info-box-text">Jumlah Suara Masuk</span>
-              <span class="info-box-number">1200</span>
+              <span class="info-box-number"><?php foreach ($jumlah_suara as $data) { echo $data->jumlah; } ?></span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -53,7 +53,7 @@
 
             <div class="info-box-content">
               <span class="info-box-text">Jumlah Relawan</span>
-              <span class="info-box-number">200</span>
+              <span class="info-box-number"><?php echo $jumlah_relawan ?></span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -64,55 +64,56 @@
       <!-- /.row -->
 
       <div class="row">
-        <div class="col-xs-12">
-          <div class="box">
-            <div class="box-body">
-              <i class="fa fa-circle" style="color: #dd4b39;"></i> Paslon 1 <span style="margin-right: 25px;"></span>
-              <i class="fa fa-circle" style="color: #00a65a;"></i> Paslon 2 
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
           <!-- DONUT CHART -->
           <div class="box box">
             <div class="box-header with-border">
-              <h3 class="box-title">Diagram donat</h3>
-
+              <h3 class="box-title">Hasil Quick Count</h3>
+              <div>
+                <?php foreach ($paslon as $data) { ?>
+                <i class="fa fa-circle" style="color: <?php echo $data->warna ?>;"></i> <?php echo $data->nama_paslon ?> <span style="margin-right: 15px;"></span>
+              <?php } ?>
+              </div>
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                 </button>
               </div>
             </div>
             <div class="box-body">
-              <canvas id="pieChart" style="height:250px"></canvas>
+              <canvas id="pieChart"></canvas>
             </div>
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
         </div>
-        <div class="col-md-6">
+        <!-- /.col-md-12 -->
+
+        <div class="col-md-12">
           <!-- BAR CHART -->
           <div class="box">
             <div class="box-header with-border">
-              <h3 class="box-title">Diagram Batang</h3>
-
+              <h3 class="box-title">Jumlah Suara per TPS</h3>
+              <div>
+                <?php foreach ($paslon as $data) { ?>
+                <i class="fa fa-circle" style="color: <?php echo $data->warna ?>;"></i> <?php echo $data->nama_paslon ?> <span style="margin-right: 15px;"></span>
+              <?php } ?>
+              </div>
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                 </button>
               </div>
             </div>
-            <div class="box-body">
+            <div class="box-body" style="overflow-x: auto;">
               <div class="chart">
-                <canvas id="barChart" style="height:230px"></canvas>
+                <canvas id="barChart" style=""></canvas>
               </div>
             </div>
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
         </div>
+        <!-- /.col-md-12 -->
+
       </div>
 
     </section>
@@ -122,29 +123,24 @@
 <script src="<?php echo base_url(); ?>assets/bower_components/chart.js/Chart.js"></script>
 <script type="text/javascript">
   $(document).ready(function(){
+    var dataSuara = [];
     var areaChartData = {
-      labels  : ['Suara'],
+      labels  : [<?php foreach ($tps as $data) {
+        echo "'$data->nama_tps - $data->tempat_tps',";
+      } ?>],
       datasets: [
-        {
-          label               : 'Paslon 1',
-          fillColor           : '#dd4b39',
-          strokeColor         : '#dd4b39',
-          pointColor          : '#dd4b39',
-          pointStrokeColor    : '#dd4b39',
-          pointHighlightFill  : '#fff',
-          pointHighlightStroke: 'rgba(220,220,220,1)',
-          data                : [700]
-        },
-        {
-          label               : 'Paslon 2',
-          fillColor           : '#00a65a',
-          strokeColor         : '#00a65a',
-          pointColor          : '#00a65a',
-          pointStrokeColor    : '#00a65a',
-          pointHighlightFill  : '#fff',
-          pointHighlightStroke: 'rgba(60,141,188,1)',
-          data                : [500]
-        }
+        <?php foreach ($suara as $data) { ?>
+          {
+            label               : <?php echo "'$data->nama_paslon'" ?>,
+            fillColor           : <?php echo "'$data->warna'" ?>,
+            strokeColor         : <?php echo "'$data->warna'" ?>,
+            pointColor          : <?php echo "'$data->warna'" ?>,
+            pointStrokeColor    : <?php echo "'$data->warna'" ?>,
+            pointHighlightFill  : '#fff',
+            pointHighlightStroke: 'rgba(0,0,0,1)',
+            data                : [<?php echo $data->concat ?>]
+          },
+        <?php } ?>
       ]
     }
     //-------------
@@ -153,9 +149,6 @@
     var barChartCanvas                   = $('#barChart').get(0).getContext('2d')
     var barChart                         = new Chart(barChartCanvas)
     var barChartData                     = areaChartData
-    barChartData.datasets[1].fillColor   = '#00a65a'
-    barChartData.datasets[1].strokeColor = '#00a65a'
-    barChartData.datasets[1].pointColor  = '#00a65a'
     var barChartOptions                  = {
       //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
       scaleBeginAtZero        : true,
@@ -180,7 +173,8 @@
       //String - A legend template
       legendTemplate          : '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].fillColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>',
       //Boolean - whether to make the chart responsive
-      responsive              : true,
+      responsive              : false,
+      multiTooltipTemplate: "<%= datasetLabel %> - <%= value %>",
       maintainAspectRatio     : true
     }
 
@@ -194,18 +188,14 @@
     var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
     var pieChart       = new Chart(pieChartCanvas)
     var PieData        = [
-      {
-        value    : 700,
-        color    : '#dd4b39',
-        highlight: '#dd4b39',
-        label    : 'Paslon 1'
-      },
-      {
-        value    : 500,
-        color    : '#00a65a',
-        highlight: '#00a65a',
-        label    : 'paslon 2'
-      }
+      <?php foreach ($suara as $data) { ?>
+          {
+            value    : <?php echo $data->jumlah ?>,
+            color    : <?php echo "'$data->warna'" ?>,
+            highlight: <?php echo "'$data->warna'" ?>,
+            label    : <?php echo "'$data->nama_paslon'" ?>
+          },
+      <?php } ?>
     ]
     var pieOptions     = {
       //Boolean - Whether we should show a stroke on each segment

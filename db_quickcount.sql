@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 19, 2018 at 11:16 AM
+-- Generation Time: May 24, 2018 at 02:59 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.1
 
@@ -34,9 +34,19 @@ CREATE TABLE `jumlah_suaras` (
   `paslon_id` int(11) NOT NULL,
   `jumlah_suara` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `jumlah_suaras`
+--
+
+INSERT INTO `jumlah_suaras` (`id`, `tps_id`, `paslon_id`, `jumlah_suara`, `user_id`, `created_at`, `updated_at`) VALUES
+(1, 4, 5, 20, 5, '2018-05-24 12:26:18', NULL),
+(2, 4, 6, 25, 5, '2018-05-24 12:26:18', NULL),
+(3, 6, 5, 30, 7, '2018-05-24 12:26:18', NULL),
+(4, 6, 6, 50, 7, '2018-05-24 12:26:18', '2018-05-24 12:56:22');
 
 -- --------------------------------------------------------
 
@@ -50,6 +60,14 @@ CREATE TABLE `paslons` (
   `nama_paslon` varchar(50) NOT NULL,
   `warna` varchar(7) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `paslons`
+--
+
+INSERT INTO `paslons` (`id`, `no_urut`, `nama_paslon`, `warna`) VALUES
+(5, '1', 'Abdul - yahya', '#c71212'),
+(6, '2', 'Obama - Trump', '#e3ae27');
 
 -- --------------------------------------------------------
 
@@ -68,8 +86,8 @@ CREATE TABLE `tps` (
 --
 
 INSERT INTO `tps` (`id`, `nama_tps`, `tempat_tps`) VALUES
-(1, 'TPS 01', 'Kel. Ragajaya'),
-(2, 'TPS 02', 'Kel. Cipayung');
+(4, 'TPS 01', 'Kel. Cipayung'),
+(6, 'TPS 02', 'Kel. Beji');
 
 -- --------------------------------------------------------
 
@@ -91,9 +109,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `tps_id`) VALUES
-(1, 'Admin Super', 'admin@quickcount.com', '21232f297a57a5a743894a0e4a801fc3', 'Relawan', 1),
-(2, 'John Doe', 'john@email.com', 'c4ca4238a0b923820dcc509a6f75849b', 'Relawan', 1),
-(3, 'khalid Yahya', 'khalid.yahya9@gmail.com', 'c4ca4238a0b923820dcc509a6f75849b', 'Relawan', 2);
+(4, 'khalid Yahya', 'khalid.yahya9@gmail.com', '21232f297a57a5a743894a0e4a801fc3', 'Admin', 4),
+(5, 'John Doe', 'john.doe@email.com', 'c4ca4238a0b923820dcc509a6f75849b', 'Relawan', 4),
+(7, 'Will Smith', 'will.smith@email.com', 'c4ca4238a0b923820dcc509a6f75849b', 'Relawan', 6);
 
 --
 -- Indexes for dumped tables
@@ -103,7 +121,10 @@ INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `tps_id`) VALUES
 -- Indexes for table `jumlah_suaras`
 --
 ALTER TABLE `jumlah_suaras`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_suara_tps` (`tps_id`),
+  ADD KEY `FK_suara_paslon` (`paslon_id`),
+  ADD KEY `FK_suara_user` (`user_id`);
 
 --
 -- Indexes for table `paslons`
@@ -132,35 +153,43 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `jumlah_suaras`
 --
 ALTER TABLE `jumlah_suaras`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `paslons`
 --
 ALTER TABLE `paslons`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tps`
 --
 ALTER TABLE `tps`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables
 --
 
 --
+-- Constraints for table `jumlah_suaras`
+--
+ALTER TABLE `jumlah_suaras`
+  ADD CONSTRAINT `FK_suara_paslon` FOREIGN KEY (`paslon_id`) REFERENCES `paslons` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_suara_tps` FOREIGN KEY (`tps_id`) REFERENCES `tps` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_suara_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
 -- Constraints for table `users`
 --
 ALTER TABLE `users`
-  ADD CONSTRAINT `fk_users_tps` FOREIGN KEY (`tps_id`) REFERENCES `tps` (`id`);
+  ADD CONSTRAINT `fk_users_tps` FOREIGN KEY (`tps_id`) REFERENCES `tps` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

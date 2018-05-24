@@ -12,7 +12,6 @@ class mod_tps extends CI_Model
 
 	function saveData($data){
 		 $this->db->insert('tps',$data);
-		 
 	}
 
 	function update($id,$data){

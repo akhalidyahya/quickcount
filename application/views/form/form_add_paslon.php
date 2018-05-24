@@ -41,7 +41,7 @@
                 <div class="form-group">
                   <label for="inputNama" class="col-sm-2 control-label">Warna</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputNama" placeholder="Pilih warna pasangan calon" name="warna_paslon">
+                    <input type="text" class="form-control my-colorpicker1" placeholder="Pilih warna pasangan calon" name="warna_paslon">
                   </div>
                 </div>
               </div>
@@ -62,4 +62,14 @@
 
     </section>
     <!-- /.content -->
-  </div>`
+  </div>
+
+<!-- Bootstrap Color Picker -->
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/bower_components/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css">
+
+<!-- bootstrap color picker -->
+<script src="<?php echo base_url(); ?>assets/bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
+
+<script type="text/javascript">
+  $('.my-colorpicker1').colorpicker();
+</script>

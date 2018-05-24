@@ -18,7 +18,7 @@
       <div class="row">
         <div class="col-sm-12">
           <!-- Default box -->
-          <div class="box box-primary">
+          <div class="box">
             <div class="box-header with-border">
               <h3 class="box-title">Tabel Data PASLON</h3>
               <div class="box-tools pull-right">
@@ -33,19 +33,20 @@
               <table id="myTable" class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>No</th>
+                    <!-- <th>No</th> -->
                     <th>No urut</th>
                     <th>Nama Paslon</th>
                     <th>Warna</th>
+                    <th>Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php $no = 1; foreach ($paslon as $data) { ?>  
                   <tr>
-                    <td><?php echo $no; ?></td>
+                    <!-- <td><?php //echo $no; ?></td> -->
                     <td><?php echo $data->no_urut; ?></td>
                     <td><?php echo $data->nama_paslon; ?></td>
-                    <td><?php echo $data->warna; ?></td>
+                    <td><i class="fa fa-circle" style="color: <?php echo $data->warna; ?>"></i> <?php echo $data->warna; ?></td>
                     <td><a href="<?php echo base_url(); ?>paslon/editPaslon/<?php echo $data->id; ?>" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i>Edit</a> <a href="<?php echo base_url(); ?>paslon/deletePaslon/<?php echo $data->id; ?>" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i>Delete</a></td>
                   </tr>
                   <?php $no++; } ?>
