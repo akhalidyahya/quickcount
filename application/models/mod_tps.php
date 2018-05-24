@@ -11,27 +11,27 @@ class mod_tps extends CI_Model
 	}
 
 	function saveData($data){
-		 $this->db->insert('users',$data);
+		 $this->db->insert('tps',$data);
 		 
 	}
 
 	function update($id,$data){
   		$this->db->where('id',$id);
-  		return $this->db->update('users',$data);
+  		return $this->db->update('tps',$data);
 	}
 
 	function delete($id){
 		$this->db->where('id',$id);
-		$this->db->delete('users');
+		$this->db->delete('tps');
 	}
 
 	function deleteAll(){
-		$this->db->truncate('users');
+		$this->db->truncate('tps');
 	}
 
 	function edit($id){
     	$this->db->where('id',$id);
-    	return $this->db->get('users');
+    	return $this->db->get('tps');
   	}
 }
  ?>
