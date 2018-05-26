@@ -41,7 +41,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <?php $no = 1; foreach ($paslon as $data) { ?>  
+                  <?php $no = 1; foreach ($paslon as $data) { ?>
                   <tr>
                     <!-- <td><?php //echo $no; ?></td> -->
                     <td><?php echo $data->no_urut; ?></td>
