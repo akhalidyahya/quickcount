@@ -6,6 +6,10 @@ class Paslon extends CI_Controller{
 	{
 		parent::__construct();
 		$this->load->model('mod_paslon');
+		if ($this->session->userdata('status') != 'login' && $this->session->userdata('role') != 'Admin')
+		{
+			redirect('login');
+		}
 	}
 
 	public function index()

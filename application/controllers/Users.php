@@ -8,6 +8,10 @@ class Users extends CI_Controller {
 		parent::__construct();
 		$this->load->model('mod_user');
 		$this->load->model('mod_tps');
+		if ($this->session->userdata('status') != 'login' && $this->session->userdata('role') != 'Admin')
+		{
+			redirect('login');
+		}
 	}
 
 	public function index()

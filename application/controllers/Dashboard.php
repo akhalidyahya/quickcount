@@ -10,6 +10,10 @@ class Dashboard extends CI_Controller {
 		$this->load->model('mod_user');
 		$this->load->model('mod_tps');
 		$this->load->model('mod_suara');
+		if ($this->session->userdata('status') != 'login' && $this->session->userdata('role') != 'Admin')
+		{
+			redirect('login');
+		}
 	}
 
 	public function index()
@@ -22,7 +26,7 @@ class Dashboard extends CI_Controller {
 		$suara = $this->mod_suara->getSuaraConcat()->result();
 		// exit();
 		$jumlah_suara = $this->mod_suara->getSuara()->result();
-		
+
 		$data['title'] = "Dashboard";
 		$data['header'] = $this->load->view('layout/header','',true);
 		$data['sidebar'] = $this->load->view('layout/sidebar','',true);
