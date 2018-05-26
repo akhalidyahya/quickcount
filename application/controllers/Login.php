@@ -24,12 +24,14 @@ class Login extends CI_Controller
 		);
 		$cek = $this->mod_login->cek_login("users", $where)->num_rows();
 		if ($cek > 0) {
+			$hasil = $this->mod_login->cek_login("users", $where)->row();
 			$data_session = array(
-				'email' => $email,
-				'status' => "login"
+				'nama' => $hasil->nama,
+				'email' => $hasil->email,
+				'role' => $this->role,
+				'status' => 'login'
 			);
 			$this->session->set_userdata($data_session);
-			echo "Selamat Anda berhasil login";
 			redirect('dashboard');
 		}
 		else {
@@ -37,9 +39,9 @@ class Login extends CI_Controller
 		}
 	}
 
-	public function logut()
+	public function logout()
 	{
-		$this->session->sess_destron();
+		$this->session->sess_destroy();
 		redirect(base_url('login'));
 	}
 

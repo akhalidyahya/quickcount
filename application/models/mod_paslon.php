@@ -1,10 +1,10 @@
 <?php
 /**
- * 
+ *
  */
 class mod_paslon extends CI_Model
 {
-	
+
 	function getData(){
 		$this->db->select('*');
 		$this->db->from('paslons'); //paslons adalah nama dbnya
