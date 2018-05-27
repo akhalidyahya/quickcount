@@ -10,7 +10,7 @@ class Users extends CI_Controller {
 		$this->load->model('mod_tps');
 		if ($this->session->userdata('status') != 'login' && $this->session->userdata('role') != 'Admin')
 		{
-			redirect('login');
+			redirect(base_url('login'));
 		}
 	}
 
@@ -77,11 +77,11 @@ class Users extends CI_Controller {
 	      	$this->mod_user->update($id,$data);
     	}
 
-    	redirect('users');
+    	redirect(base_url('users'));
 	}
 
 	public function deleteRelawan($id){
 		$this->mod_user->delete($id);
-		redirect('users');
+		redirect(base_url('users'));
 	}
 }

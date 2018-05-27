@@ -8,7 +8,7 @@ class Paslon extends CI_Controller{
 		$this->load->model('mod_paslon');
 		if ($this->session->userdata('status') != 'login' && $this->session->userdata('role') != 'Admin')
 		{
-			redirect('login');
+			redirect(base_url('login'));
 		}
 	}
 
@@ -64,15 +64,11 @@ class Paslon extends CI_Controller{
 			$id = $this->input->post('id');
 			$this->mod_paslon->update($id,$data);
 		}
-		redirect('paslon');
+		redirect(base_url('paslon'));
 	}
+
 	public function deletePaslon($id){
 		$this->mod_paslon->delete($id);
-		redirect('paslon');
+		redirect(base_url('paslon'));
 	}
-
-
-
-
-
 }

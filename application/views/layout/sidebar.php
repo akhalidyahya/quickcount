@@ -1,6 +1,6 @@
 <style type="text/css">
 .skin-black-light .sidebar-menu>li.active {
-  border-right: 3.5px solid #000;
+  border-right: 3.5px solid #353535;
 }
 </style>
 <aside class="main-sidebar">
@@ -9,10 +9,11 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="<?php echo base_url(); ?>assets/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <!-- <img src="<?php //echo base_url(); ?>assets/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image"> --> 
+          <i class="fa fa-user-circle" style="font-size: 50px;"></i>
         </div>
         <div class="pull-left info">
-          <p>Alexander Pierce</p>
+          <p><?php echo $this->session->userdata('nama'); ?></p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>

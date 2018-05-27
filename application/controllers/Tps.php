@@ -10,7 +10,7 @@ class Tps extends CI_Controller {
 		$this->load->model('mod_tps');
 		if ($this->session->userdata('status') != 'login' && $this->session->userdata('role') != 'Admin')
 		{
-			redirect('login');
+			redirect(base_url('login'));
 		}
 	}
 
@@ -64,12 +64,11 @@ class Tps extends CI_Controller {
     		$id = $this->input->post('id');
 	      	$this->mod_tps->update($id,$data);
     	}
-
-    	redirect('tps');
+    	redirect(base_url('tps'));
 	}
 
 	public function deleteTps($id){
 		$this->mod_tps->delete($id);
-		redirect('tps');
+		redirect(base_url('tps'));
 	}
 }

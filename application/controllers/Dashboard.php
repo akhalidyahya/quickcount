@@ -12,7 +12,7 @@ class Dashboard extends CI_Controller {
 		$this->load->model('mod_suara');
 		if ($this->session->userdata('status') != 'login' && $this->session->userdata('role') != 'Admin')
 		{
-			redirect('login');
+			redirect(base_url('login'));
 		}
 	}
 

@@ -20,7 +20,8 @@ class Login extends CI_Controller
 		$password = $this->input->post('password');
 		$where = array(
 			'email' => $email,
-			'password' => md5($password)
+			'password' => md5($password),
+			'role' => 'Admin'
 		);
 		$cek = $this->mod_login->cek_login("users", $where)->num_rows();
 		if ($cek > 0) {
@@ -32,7 +33,7 @@ class Login extends CI_Controller
 				'status' => 'login'
 			);
 			$this->session->set_userdata($data_session);
-			redirect('dashboard');
+			redirect(base_url('dashboard'));
 		}
 		else {
 			echo "Email dan password salah!";
@@ -44,7 +45,5 @@ class Login extends CI_Controller
 		$this->session->sess_destroy();
 		redirect(base_url('login'));
 	}
-
-
 
 }

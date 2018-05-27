@@ -12,8 +12,7 @@ class mod_user extends CI_Model
 	}
 
 	function saveData($data){
-		 $this->db->insert('users',$data);
-		 
+		$this->db->insert('users',$data);
 	}
 
 	function update($id,$data){
