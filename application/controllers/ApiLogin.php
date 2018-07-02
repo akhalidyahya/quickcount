@@ -21,7 +21,7 @@ class ApiLogin extends REST_Controller
 		$where = array(
 			'email' => $email,
 			'password' => md5($password),
-			'role' => 'Admin'
+			'role' => 'Relawan'
 		);
 		$cek = $this->mod_login->cek_login("users", $where)->result_array();
 		$this->response($cek, 200);

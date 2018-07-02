@@ -41,7 +41,7 @@
                 <div class="form-group">
                   <label for="inputNama" class="col-sm-2 control-label">Warna</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control my-colorpicker1" placeholder="Pilih warna pasangan calon" name="warna_paslon">
+                    <input type="text" class="form-control my-colorpicker1" placeholder="Pilih warna pasangan calon" name="warna_paslon" autocomplete="off">
                   </div>
                 </div>
               </div>

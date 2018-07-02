@@ -126,7 +126,7 @@
     var dataSuara = [];
     var areaChartData = {
       labels  : [<?php foreach ($tps as $data) {
-        echo "'$data->nama_tps - $data->tempat_tps',";
+        echo "'$data->nama_tps $data->tempat_tps',";
       } ?>],
       datasets: [
         <?php foreach ($suara as $data) { ?>
