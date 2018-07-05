@@ -41,5 +41,14 @@ class mod_user extends CI_Model
 		$this->db->where('role','Relawan');
     	return $this->db->get();
 	}
+
+	function getSpesificRelawan($id){
+		$this->db->select('users.id,users.nama,users.email,users.password,users.role,tps.nama_tps');
+		$this->db->from('users');
+		$this->db->join('tps','users.tps_id=tps.id');
+		$this->db->where('role','Relawan');
+		$this->db->where('users.id',$id);
+    	return $this->db->get();
+	}
 }
  ?>

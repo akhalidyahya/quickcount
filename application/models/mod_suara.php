@@ -20,5 +20,18 @@ class mod_suara extends CI_Model
 		$this->db->from('jumlah_suaras');
 		return $this->db->get();
 	}
+
+	function getSuaraPaslon($id)
+	{
+		$this->db->select('sum(jumlah_suaras.jumlah_suara) as jumlah, paslons.nama_paslon, paslons.warna');
+		$this->db->from('jumlah_suaras');
+		$this->db->join('paslons','jumlah_suaras.paslon_id=paslons.id','left');
+		$this->db->where('paslon_id',$id);
+		return $this->db->get();
+	}
+
+	function saveData($data){
+		$this->db->insert('jumlah_suaras',$data);
+	}
 }
  ?>

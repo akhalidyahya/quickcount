@@ -20,20 +20,27 @@ class Login extends CI_Controller
 		$password = $this->input->post('password');
 		$where = array(
 			'email' => $email,
-			'password' => md5($password),
-			'role' => 'Admin'
+			'password' => md5($password)
 		);
 		$cek = $this->mod_login->cek_login("users", $where)->num_rows();
 		if ($cek > 0) {
 			$hasil = $this->mod_login->cek_login("users", $where)->row();
 			$data_session = array(
+				'id' => $hasil->id,
+				'tps_id' => $hasil->tps_id,
 				'nama' => $hasil->nama,
 				'email' => $hasil->email,
-				'role' => $this->role,
+				'role' => $hasil->role,
+				'status_akun' => $hasil->status,
 				'status' => 'login'
 			);
 			$this->session->set_userdata($data_session);
-			redirect(base_url('dashboard'));
+			if ($hasil->role == 'Admin') {
+				redirect(base_url('dashboard'));
+			} else {
+				redirect(base_url('suara'));
+			}
+			
 		}
 		else {
 			echo "Email dan password salah!";
